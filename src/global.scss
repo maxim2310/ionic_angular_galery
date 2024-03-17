@@ -24,3 +24,35 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+ion-header {
+  box-shadow: none !important;
+  border-bottom: 2px solid var(--ion-color-primary-shade);
+}
+
+ion-icon {
+  fill: var(--ion-color-primary);
+  stroke: var(--ion-color-primary);
+}
+
+ion-button {
+  color: var(--ion-color-primary);
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: -0.2px;
+
+  &.logo {
+    font-weight: 900;
+  }
+}
+
+.ripple-off {
+  --ripple-color: transparent;
+  --background-hover: transparent;
+}
+.ripple-off.ion-activated {
+  --ripple-color: transparent;
+  --background-hover: transparent;
+  opacity: 0.9;
+}
