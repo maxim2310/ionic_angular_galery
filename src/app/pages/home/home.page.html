@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button class="logo ripple-off" slot="start" fill="clear">
+      <ion-icon src="../../../assets/icon/logo.svg" size="large"></ion-icon>
+      Logo
+    </ion-button>
+
+    <ion-button fill="clear">
+      <ion-icon name="search"></ion-icon>
+      Search
+    </ion-button>
+
+    <ion-button slot="end" fill="clear">
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      Login
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if (items$ | async; as item) {
+    @if (item.length) {
+      <ion-row class="main-row">
+        <ion-col size="12">
+          <swiper-container #swiper appSwiperConfig [config]="swiperConfig">
+            @for (item of itemImages$ | async; track item) {
+            <swiper-slide><ion-img [src]="item"></ion-img></swiper-slide>
+            }
+            <!-- <swiper-slide><ion-img src="https://picsum.photos/500/500"></ion-img></swiper-slide>
+              <swiper-slide><ion-img src="https://picsum.photos/500/500"></ion-img></swiper-slide>
+              <swiper-slide><ion-img src="https://picsum.photos/500/500"></ion-img></swiper-slide>
+              <swiper-slide><ion-img src="https://picsum.photos/500/500"></ion-img></swiper-slide> -->
+
+            <!-- <swiper-slide>123</swiper-slide>
+              <swiper-slide>123</swiper-slide>
+              <swiper-slide>123</swiper-slide>
+              <swiper-slide>123</swiper-slide> -->
+          </swiper-container>
+        </ion-col>
+      </ion-row>
+
+    }
+  }
+</ion-content>

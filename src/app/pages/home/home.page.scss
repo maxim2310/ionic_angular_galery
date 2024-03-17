@@ -1,0 +1,21 @@
+@import "../../../theme/mixins.scss";
+ion-toolbar {
+  --padding-end: 30px;
+}
+
+.main-row {
+  @include desktop {
+    margin: 0 auto;
+    max-width: 1440px;
+  }
+}
+
+// swiper-container {
+//   height: 40vh;
+
+//   ion-img {
+//     object-fit: fill;
+//     height: 100%;
+//     width: 100%;
+//   }
+// }
