@@ -18,8 +18,8 @@
         <ion-col [size]="sizeDesktop" class="ion-no-padding">
           <ion-row>
             @for (item of items; track item.id) {
-              <ion-col size="3" class="ion-no-padding">
-                <app-list-item  [item]="item" (click)="selectItem(item)"></app-list-item>
+              <ion-col size="3" class="ion-no-padding" >
+                <app-list-item [routerLink]="['/item/' + item.id]" [item]="item" ></app-list-item>
               </ion-col>
             }
           </ion-row>

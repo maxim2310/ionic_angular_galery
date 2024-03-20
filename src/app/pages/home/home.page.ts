@@ -28,6 +28,7 @@ import { NavigationService } from 'src/app/services/navigation.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { Item } from 'src/models/item';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -45,21 +46,21 @@ import { Item } from 'src/models/item';
     IonIcon,
     SwiperConfigDirective,
     ListItemComponent,
-    HeaderComponent
+    HeaderComponent,
+    RouterModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage implements OnInit, AfterViewInit {
-
   public sizeDesktop = 9;
   public sizeMobile = 12;
-  public isLogin$ = this.authService.user$.pipe(map(v => !!v));
+  public isLogin$ = this.authService.user$.pipe(map((v) => !!v));
   public items$ = this.itemService.items$;
   public itemImages$ = this.itemService.items$.pipe(
     map((items) =>
       items.filter((_, index) => index < 3).map((item) => item.url)
-      )
+    )
   );
   public swiperConfig: SwiperOptions = {
     modules: [IonicSlides],
@@ -79,9 +80,7 @@ export class HomePage implements OnInit, AfterViewInit {
     private navService: NavigationService,
     private authService: AuthService,
     private destroyRef: DestroyRef
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.itemService.loadItems();
@@ -101,12 +100,12 @@ export class HomePage implements OnInit, AfterViewInit {
       this.swiper.nativeElement.swiper.loopCreate();
       this.swiper.nativeElement.swiper.activeIndex = 0;
       this.swiper.nativeElement.swiper.update();
-      // this.swiper.nativeElement.swiper.autoplay.start();
+      this.swiper.nativeElement.swiper.autoplay.start();
     }
   }
 
   selectItem(item: Item) {
-    this.navService.itemDetails(item.id)
+    this.navService.itemDetails(item.id);
   }
 
   toLogin() {

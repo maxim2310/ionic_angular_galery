@@ -54,14 +54,13 @@ export class ItemDetailsComponent {
   public isLogin$ = this.authService.user$.pipe(map((user) => !!user));
 
   public item$: Observable<Item | null> = this.itemService.items$.pipe(
-    switchMap((items) => {
+    map((items) => {
       if (!items.length) {
         this.itemService.loadItems();
-        return EMPTY;
+        return null;
       }
-      return of(items.find((item) => item.id === this.id));
-    }),
-    map((foundItem) => foundItem ?? null)
+      return items.find((item) => item.id === this.id) || null;
+    })
   );
 
   toLogin() {

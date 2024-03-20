@@ -8,13 +8,14 @@ import { toObservable } from '@angular/core/rxjs-interop';
   providedIn: 'root',
 })
 export class AuthService  {
-  private ACTIVE_USER_KEY = 'active_user';
+  static readonly ACTIVE_USER_KEY = 'active_user';
   private user = new BehaviorSubject<User | null>(null);
 
   public user$ = this.user.asObservable()
 
   constructor(private storService: StorageService) {
-    this.storService.getData(this.ACTIVE_USER_KEY).then(user => {
+
+    this.storService.getData(AuthService.ACTIVE_USER_KEY).then(user => {
       if (user) {
         this.user.next(user)
       }
@@ -29,7 +30,7 @@ export class AuthService  {
     }
 
     this.storService.saveData(user.email, user.password);
-    this.storService.saveData(this.ACTIVE_USER_KEY, user);
+    this.storService.saveData(AuthService.ACTIVE_USER_KEY, user);
     this.user.next(user);
   }
 
@@ -41,11 +42,11 @@ export class AuthService  {
     }
 
     this.user.next(user);
-    this.storService.saveData(this.ACTIVE_USER_KEY, user);
+    this.storService.saveData(AuthService.ACTIVE_USER_KEY, user);
   }
 
   async logOut() {
-    this.storService.removeData(this.ACTIVE_USER_KEY).then(() => {
+    this.storService.removeData(AuthService.ACTIVE_USER_KEY).then(() => {
       this.user.next(null)
     })
   }
