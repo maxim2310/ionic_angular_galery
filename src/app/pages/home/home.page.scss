@@ -1,21 +1,33 @@
 @import "../../../theme/mixins.scss";
+
+
+
 ion-toolbar {
   --padding-end: 30px;
 }
 
-.main-row {
-  @include desktop {
-    margin: 0 auto;
-    max-width: 1440px;
-  }
+.swiper-row {
+  margin-top: 15px;
+  border-bottom: 2px solid var(--ion-color-primary-shade);
 }
 
-// swiper-container {
-//   height: 40vh;
+swiper-container {
+  height: 44vh;
+  --swiper-theme-color: var(--ion-color-primary);
 
-//   ion-img {
-//     object-fit: fill;
-//     height: 100%;
-//     width: 100%;
-//   }
-// }
+
+  swiper-slide {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    padding-bottom: 50px;
+
+  }
+
+  ion-img {
+    object-fit: fill;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+}

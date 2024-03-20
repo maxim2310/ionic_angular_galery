@@ -25,6 +25,19 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+app-home,
+app-registration,
+app-login,
+app-item-details {
+  ion-header {
+    --background: var(--ion-background);
+    --ion-toolbar-background: var(--ion-background);
+  }
+  ion-content {
+    --background: var(--ion-background);
+  }
+}
+
 ion-header {
   box-shadow: none !important;
   border-bottom: 2px solid var(--ion-color-primary-shade);
@@ -55,4 +68,40 @@ ion-button {
   --ripple-color: transparent;
   --background-hover: transparent;
   opacity: 0.9;
+}
+
+.form {
+  color: var(--ion-black);
+  --color: var(--ion-black);
+  ion-label {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .input-fill-outline {
+    --border-width: 2px !important;
+    --border-radius: 4px;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    min-height: 40px;
+
+    ion-icon {
+      margin-right: 7px;
+    }
+  }
+
+  ion-note {
+    opacity: 0;
+    font-size: 10px;
+    transition: opacity .3s;
+    &.visible {
+      opacity: 1;
+    }
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #000;
+  -webkit-box-shadow: 0 0 0px 40rem #ffffff inset;
 }

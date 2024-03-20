@@ -1,0 +1,41 @@
+:host {
+  display: block;
+}
+
+.input-wrapper {
+  margin-bottom: 10px;
+  &:first-child {
+    margin-bottom: 20px;
+  }
+}
+ion-button {
+  min-height: 35px;
+}
+
+.submit-button {
+  margin-top: 30px;
+  --border-radius: 4px;
+  --background: var(--ion-black);
+  color: var(--ion-color-primary-contrast);
+}
+
+ion-card {
+  box-shadow: none;
+
+  ion-card-header {
+    background: var(--ion-background);
+
+    ion-card-title {
+      --color: var(--ion-black);
+      text-align: center;
+      font-weight: 900;
+    }
+  }
+
+  ion-card-content {
+    padding-inline-start: 25px;
+    padding-inline-end: 25px;
+    padding-bottom: 80px;
+    padding-top: 40px;
+  }
+}

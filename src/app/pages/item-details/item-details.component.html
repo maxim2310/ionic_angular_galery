@@ -1,0 +1,24 @@
+<app-header
+  [isLogin]="isLogin$ | async"
+  (login)="toLogin()"
+  (logOut)="logOut()"
+  (clickLogo)="backHome()"
+></app-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center">
+    @if(item$ | async; as item) {
+    <ion-card>
+      <img [alt]="item.title" [src]="item.url" />
+      <ion-card-header>
+        <ion-card-title>{{ item.title }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more,
+        nothing less.
+      </ion-card-content>
+    </ion-card>
+    }
+  </ion-row>
+</ion-content>

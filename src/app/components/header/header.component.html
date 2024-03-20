@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button class="logo ripple-off" slot="start" fill="clear" (click)="clickLogo.emit()">
+      <ion-icon src="../../../assets/icon/logo.svg" size="large"></ion-icon>
+      Logo
+    </ion-button>
+
+    <ion-button fill="clear">
+      <ion-icon name="search"></ion-icon>
+      Search
+    </ion-button>
+
+    @if(isLogin) {
+      <ion-button slot="end" fill="clear" (click)="logOut.emit()">
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        Log out
+      </ion-button>
+    } @else {
+      <ion-button slot="end" fill="clear" (click)="login.emit()">
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        Login
+      </ion-button>
+    }
+
+  </ion-toolbar>
+</ion-header>

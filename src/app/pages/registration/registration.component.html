@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button class="logo ripple-off" slot="start" fill="clear">
+      <ion-icon src="../../../assets/icon/logo.svg" size="large"></ion-icon>
+      Logo
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="5">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Sign Up</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <form mode="ios" class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="input-wrapper">
+              <ion-label>Email address</ion-label>
+              <ion-input
+                type="email"
+                fill="outline"
+                mode="md"
+                aria-label="email"
+                formControlName="email"
+              >
+                <ion-icon
+                  slot="start"
+                  name="mail-outline"
+                  size="small"
+                ></ion-icon>
+              </ion-input>
+              <ion-note color="danger" [class.visible]="getError('email')"
+                >{{getError('email')}}</ion-note
+              >
+            </div>
+
+            <div class="input-wrapper">
+              <ion-label>Password</ion-label>
+              <ion-input
+                type="password"
+                aria-label="password"
+                fill="outline"
+                mode="md"
+                formControlName="password"
+              >
+                <ion-icon
+                  slot="start"
+                  name="lock-closed-outline"
+                  size="small"
+                  aria-hidden="true"
+                ></ion-icon>
+              </ion-input>
+              <ion-note color="danger" [class.visible]="getError('password')"
+              >{{getError('password')}}</ion-note
+            >
+            </div>
+
+            <div class="input-wrapper">
+              <ion-label>Password Confirmation</ion-label>
+              <ion-input
+                type="password"
+                aria-label="password"
+                fill="outline"
+                mode="md"
+                formControlName="rePassword"
+              >
+                <ion-icon
+                  slot="start"
+                  name="lock-closed-outline"
+                  size="small"
+                ></ion-icon>
+              </ion-input>
+              <ion-note color="danger" [class.visible]="getError('rePassword')"
+              >{{getError('rePassword')}}</ion-note
+            >
+            </div>
+
+            <ion-button
+              expand="full"
+              class="submit-button"
+              shape="round"
+              fill="clear"
+              [disabled]="form.invalid"
+              type="submit"
+            >
+              Create account
+            </ion-button>
+          </form>
+
+          
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

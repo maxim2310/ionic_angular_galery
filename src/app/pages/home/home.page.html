@@ -1,44 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-button class="logo ripple-off" slot="start" fill="clear">
-      <ion-icon src="../../../assets/icon/logo.svg" size="large"></ion-icon>
-      Logo
-    </ion-button>
+<app-header [isLogin]="isLogin$ | async" (login)="toLogin()" (logOut)="logOut()"></app-header>
 
-    <ion-button fill="clear">
-      <ion-icon name="search"></ion-icon>
-      Search
-    </ion-button>
-
-    <ion-button slot="end" fill="clear">
-      <ion-icon slot="start" name="person-outline"></ion-icon>
-      Login
-    </ion-button>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
-  @if (items$ | async; as item) {
-    @if (item.length) {
-      <ion-row class="main-row">
-        <ion-col size="12">
+<ion-content>
+  @if (items$ | async; as items) {
+    @if (items.length) {
+      <ion-row class="ion-justify-content-center swiper-row">
+        <ion-col [size]="sizeDesktop">
           <swiper-container #swiper appSwiperConfig [config]="swiperConfig">
             @for (item of itemImages$ | async; track item) {
             <swiper-slide><ion-img [src]="item"></ion-img></swiper-slide>
             }
-            <!-- <swiper-slide><ion-img src="https://picsum.photos/500/500"></ion-img></swiper-slide>
-              <swiper-slide><ion-img src="https://picsum.photos/500/500"></ion-img></swiper-slide>
-              <swiper-slide><ion-img src="https://picsum.photos/500/500"></ion-img></swiper-slide>
-              <swiper-slide><ion-img src="https://picsum.photos/500/500"></ion-img></swiper-slide> -->
-
-            <!-- <swiper-slide>123</swiper-slide>
-              <swiper-slide>123</swiper-slide>
-              <swiper-slide>123</swiper-slide>
-              <swiper-slide>123</swiper-slide> -->
+            <div class="swiper-pagination" ></div>
           </swiper-container>
         </ion-col>
       </ion-row>
 
+      <ion-row class="ion-justify-content-center ion-padding-vertical grid-row">
+        <ion-col [size]="sizeDesktop" class="ion-no-padding">
+          <ion-row>
+            @for (item of items; track item.id) {
+              <ion-col size="3" class="ion-no-padding">
+                <app-list-item  [item]="item" (click)="selectItem(item)"></app-list-item>
+              </ion-col>
+            }
+          </ion-row>
+        </ion-col>
+      </ion-row>
     }
   }
 </ion-content>

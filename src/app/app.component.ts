@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { IonApp, IonRouterOutlet, IonImg } from '@ionic/angular/standalone';
+import { ItemsService } from './services/items.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
   standalone: true,
-  imports: [IonApp, IonRouterOutlet],
+  imports: [IonImg, IonApp, IonRouterOutlet, AsyncPipe],
 })
 export class AppComponent {
-  constructor() {}
+  public loading$ = this.itemService.loading$;
+  constructor(private itemService: ItemsService) {}
 }
