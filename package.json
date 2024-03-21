@@ -6,8 +6,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "build:prod": "ng build --configuration=production --base-href=/https://maxim2310.github.io/ionic_angular_gallery/",
+    "build": "ng build --output-path=docs",
+    "build:prod": "ng build --configuration=production --base-href=/ionic_angular_gallery/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
