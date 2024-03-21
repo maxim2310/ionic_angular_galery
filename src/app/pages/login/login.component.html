@@ -1,15 +1,10 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-button class="logo ripple-off" slot="start" fill="clear">
-      <ion-icon src="../../../assets/icon/logo.svg" size="large"></ion-icon>
-      Logo
-    </ion-button>
-  </ion-toolbar>
-</ion-header>
+<app-header
+  [isLogin]="isLogin$ | async"
+></app-header>
 
 <ion-content>
   <ion-row class="ion-justify-content-center">
-    <ion-col size="5">
+    <ion-col size="12" sizeMd="8" sizeLg="7">
       <ion-card>
         <ion-card-header>
           <ion-card-title>Log in</ion-card-title>

@@ -1,7 +1,5 @@
 @import "../../../theme/mixins.scss";
 
-
-
 ion-toolbar {
   --padding-end: 30px;
 }
@@ -15,12 +13,14 @@ swiper-container {
   height: 44vh;
   --swiper-theme-color: var(--ion-color-primary);
 
+  @include mobile {
+    height: 30vh;
+  }
 
   swiper-slide {
     border-radius: var(--border-radius);
     overflow: hidden;
     padding-bottom: 50px;
-
   }
 
   ion-img {

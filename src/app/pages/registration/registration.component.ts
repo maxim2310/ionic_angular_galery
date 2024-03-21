@@ -28,6 +28,8 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { lockClosedOutline, mailOutline } from 'ionicons/icons';
+import { map } from 'rxjs';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavigationService } from 'src/app/services/navigation.service';
 
@@ -54,6 +56,7 @@ import { NavigationService } from 'src/app/services/navigation.service';
     CommonModule,
     IonIcon,
     ReactiveFormsModule,
+    HeaderComponent,
   ],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss',
@@ -67,6 +70,8 @@ export class RegistrationComponent {
     minLength: 'This field must have length at least 6',
     notSame: 'This field must match the password field',
   };
+  public isLogin$ = this.authService.user$.pipe(map((user) => !!user));
+
 
   constructor(
     private fb: FormBuilder,
@@ -115,7 +120,7 @@ export class RegistrationComponent {
   async onSubmit() {
     try {
       await this.authService.createUser(this.form.value);
-      this.navService.home()
+      this.navService.home();
     } catch (error: any) {
       if (error.message) {
         const alert = await this.alertController.create({
@@ -130,4 +135,5 @@ export class RegistrationComponent {
       }
     }
   }
+
 }

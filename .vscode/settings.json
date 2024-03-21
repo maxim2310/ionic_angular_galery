@@ -3,7 +3,14 @@
     "@ionic/angular/common",
     "@ionic/angular"
   ],
-  "cSpell.words": ["devkit", "ionicons", "NAVURLS", "styleext", "swiper"],
+  "cSpell.words": [
+    "devkit",
+    "ionicons",
+    "NAVURLS",
+    "searchbar",
+    "styleext",
+    "swiper"
+  ],
   "angular-schematics.schematicsDefaultOptions": {
     "angular-*": {
       "externalTemplate": true

@@ -5,6 +5,7 @@ const NAVURLS = {
   home: () => '/home',
   login: () => '/login',
   registration: () => '/registration',
+  search: () => '/search',
   itemDetailsL: (id: string) => `/item/${id}`
 }
 
@@ -26,5 +27,8 @@ export class NavigationService {
   }
   itemDetails(id: string) {
     this.router.navigateByUrl(NAVURLS.itemDetailsL(id))
+  }
+  search() {
+    this.router.navigateByUrl(NAVURLS.search())
   }
 }

@@ -1,30 +1,35 @@
-<app-header [isLogin]="isLogin$ | async" (login)="toLogin()" (logOut)="logOut()"></app-header>
+<app-header
+  [isLogin]="isLogin$ | async"
+  [isLoginButton]="true"
+  [isSearchButton]="true"
+></app-header>
 
 <ion-content>
-  @if (items$ | async; as items) {
-    @if (items.length) {
-      <ion-row class="ion-justify-content-center swiper-row">
-        <ion-col [size]="sizeDesktop">
-          <swiper-container #swiper appSwiperConfig [config]="swiperConfig">
-            @for (item of itemImages$ | async; track item) {
-            <swiper-slide><ion-img [src]="item"></ion-img></swiper-slide>
-            }
-            <div class="swiper-pagination" ></div>
-          </swiper-container>
-        </ion-col>
-      </ion-row>
+  @if (items$ | async; as items) { @if (items.length) {
+  <ion-row class="ion-justify-content-center swiper-row">
+    <ion-col size="12" [sizeMd]="9" [sizeLg]="8">
+      <swiper-container #swiper appSwiperConfig [config]="swiperConfig">
+        @for (item of itemImages$ | async; track item) {
+        <swiper-slide><ion-img [src]="item"></ion-img></swiper-slide>
+        }
+        <div class="swiper-pagination"></div>
+      </swiper-container>
+    </ion-col>
+  </ion-row>
 
-      <ion-row class="ion-justify-content-center ion-padding-vertical grid-row">
-        <ion-col [size]="sizeDesktop" class="ion-no-padding">
-          <ion-row>
-            @for (item of items; track item.id) {
-              <ion-col size="3" class="ion-no-padding" >
-                <app-list-item [routerLink]="['/item/' + item.id]" [item]="item" ></app-list-item>
-              </ion-col>
-            }
-          </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-vertical grid-row">
+    <ion-col size="12" [sizeMd]="9" [sizeLg]="8" class="ion-no-padding">
+      <ion-row>
+        @for (item of items; track item.id) {
+        <ion-col size="6" [sizeMd]="4" [sizeLg]="3" class="ion-no-padding">
+          <app-list-item
+            (click)="selectItem(item)"
+            [item]="item"
+          ></app-list-item>
         </ion-col>
+        }
       </ion-row>
-    }
-  }
+    </ion-col>
+  </ion-row>
+  } }
 </ion-content>

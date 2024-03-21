@@ -4,11 +4,10 @@ import {
   Component,
   Input,
 } from '@angular/core';
-import { EMPTY, Observable, map, of, switchMap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { ItemsService } from 'src/app/services/items.service';
-import { NavigationService } from 'src/app/services/navigation.service';
 import { Item } from 'src/models/item';
 import {
   IonContent,
@@ -48,14 +47,13 @@ export class ItemDetailsComponent {
   constructor(
     private itemService: ItemsService,
     private authService: AuthService,
-    private navService: NavigationService
   ) {}
 
   public isLogin$ = this.authService.user$.pipe(map((user) => !!user));
 
   public item$: Observable<Item | null> = this.itemService.items$.pipe(
     map((items) => {
-      if (!items.length) {
+      if (!items.length) {   //if you try open route directly
         this.itemService.loadItems();
         return null;
       }
@@ -63,14 +61,4 @@ export class ItemDetailsComponent {
     })
   );
 
-  toLogin() {
-    this.navService.login();
-  }
-  logOut() {
-    this.authService.logOut();
-    this.navService.home();
-  }
-  backHome() {
-    this.navService.home();
-  }
 }

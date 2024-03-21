@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, delay, finalize } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  delay,
+  map,
+} from 'rxjs';
 import { Item } from 'src/models/item';
 
 @Injectable({
@@ -21,6 +26,27 @@ export class ItemsService {
     this.httpClient
       .get<Item[]>('../../assets/data/items.json')
       .pipe(delay(2000))
+      .subscribe((items) => {
+        this.items.next(items);
+        this.loading.next(false);
+      });
+  }
+
+  public getItemsByTitle(titleQuery: string) {
+    this.loading.next(true);
+
+    this.httpClient
+      .get<Item[]>('../../assets/data/items.json')
+      .pipe(
+        delay(2000),
+        map((items) =>
+          items.filter((item) =>
+            item.title
+              .toLocaleLowerCase()
+              .includes(titleQuery.toLocaleLowerCase())
+          )
+        )
+      )
       .subscribe((items) => {
         this.items.next(items);
         this.loading.next(false);

@@ -1,8 +1,7 @@
 <app-header
   [isLogin]="isLogin$ | async"
-  (login)="toLogin()"
-  (logOut)="logOut()"
-  (clickLogo)="backHome()"
+  [isLoginButton]="true"
+  [isSearchButton]="true"
 ></app-header>
 
 <ion-content>

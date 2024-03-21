@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
-import { Observable, from, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { NavigationService } from '../services/navigation.service';
@@ -19,8 +19,6 @@ export class AuthGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return from(this.storService.getData(AuthService.ACTIVE_USER_KEY)).pipe(
       map((user) => {
-        console.log(user);
-
         if (user) {
           return true;
         } else {

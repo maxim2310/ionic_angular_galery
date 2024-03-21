@@ -4,7 +4,6 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   ElementRef,
   OnInit,
   ViewChild,
@@ -17,9 +16,9 @@ import {
   IonButton,
   IonIcon,
   IonicSlides,
+  ModalController,
 } from '@ionic/angular/standalone';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { delay, map } from 'rxjs';
+import { EMPTY, Subject, delay, map, switchMap, take, takeUntil, timer } from 'rxjs';
 import { SwiperConfigDirective } from 'src/app/directives/swiper-config.directive';
 import { ItemsService } from 'src/app/services/items.service';
 import { SwiperOptions } from 'swiper/types/swiper-options';
@@ -29,6 +28,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { Item } from 'src/models/item';
 import { RouterModule } from '@angular/router';
+import { ShortInfoModalComponent } from 'src/app/components/short-info-modal/short-info-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -47,15 +47,14 @@ import { RouterModule } from '@angular/router';
     SwiperConfigDirective,
     ListItemComponent,
     HeaderComponent,
-    RouterModule
+    RouterModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage implements OnInit, AfterViewInit {
-  public sizeDesktop = 9;
-  public sizeMobile = 12;
-  public isLogin$ = this.authService.user$.pipe(map((v) => !!v));
+  public destroy$ = new Subject()
+  public isLogin$ = this.authService.user$.pipe(map((user) => !!user));
   public items$ = this.itemService.items$;
   public itemImages$ = this.itemService.items$.pipe(
     map((items) =>
@@ -79,19 +78,25 @@ export class HomePage implements OnInit, AfterViewInit {
     private itemService: ItemsService,
     private navService: NavigationService,
     private authService: AuthService,
-    private destroyRef: DestroyRef
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
     this.itemService.loadItems();
+    this.showIfGuest();
   }
+
 
   ngAfterViewInit() {
     this.itemService.items$
-      .pipe(takeUntilDestroyed(this.destroyRef), delay(100))
-      .subscribe((items) => {
+      .pipe(takeUntil(this.destroy$), delay(100))
+      .subscribe(() => {
         this.refreshSwiper();
       });
+  }
+
+  ionViewWillLeave() {
+    this.destroy$.next(null)
   }
 
   refreshSwiper() {
@@ -105,13 +110,47 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   selectItem(item: Item) {
-    this.navService.itemDetails(item.id);
+    this.isLogin$.pipe(take(1)).subscribe(async (isLoggedIn) => {
+      if (isLoggedIn) {
+        this.navService.itemDetails(item.id);
+      } else {
+        const result = await ShortInfoModalComponent.show(this.modalCtrl, {
+          header: 'Log in to continue',
+          desc: 'To continue you have to log in',
+        });
+
+        if (result === 'ok') {
+          this.navService.login();
+        }
+      }
+    });
   }
 
-  toLogin() {
-    this.navService.login();
-  }
-  logOut() {
-    this.authService.logOut();
+  showIfGuest(): void {
+    this.isLogin$
+      .pipe(
+        takeUntil(this.destroy$),
+        take(1),
+        switchMap((isLogin) => {
+          if (!isLogin) {
+            return timer(30000).pipe(
+              takeUntil(this.destroy$),
+              take(1),
+              switchMap(() => {
+                return ShortInfoModalComponent.show(this.modalCtrl, {
+                  header: 'Please log in',
+                  desc: 'Access more by joining our platform',
+                });
+              })
+            );
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((result) => {
+        if (result === 'ok') {
+          this.navService.login();
+        }
+      });
   }
 }

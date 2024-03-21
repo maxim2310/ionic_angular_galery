@@ -22,6 +22,8 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { lockClosedOutline, mailOutline } from 'ionicons/icons';
+import { map } from 'rxjs';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavigationService } from 'src/app/services/navigation.service';
 
@@ -47,6 +49,7 @@ import { NavigationService } from 'src/app/services/navigation.service';
     IonToolbar,
     IonHeader,
     CommonModule,
+    HeaderComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -54,11 +57,11 @@ import { NavigationService } from 'src/app/services/navigation.service';
 })
 export class LoginComponent {
   form: FormGroup;
-
   errors = {
     required: 'This field is required',
     email: 'Please enter a valid email address.',
   };
+  public isLogin$ = this.authService.user$.pipe(map((user) => !!user));
 
   constructor(private fb: FormBuilder, private navService: NavigationService, private authService: AuthService, private alertController: AlertController) {
     addIcons({ lockClosedOutline, mailOutline });
@@ -91,8 +94,6 @@ export class LoginComponent {
   }
 
   async onSubmit() {
-    console.log(this.form.value);
-
     try {
       await this.authService.login(this.form.value);
       this.navService.home()
@@ -104,7 +105,6 @@ export class LoginComponent {
         });
 
         await alert.present();
-        this.form.reset();
       } else {
         console.error('Something went wrong while creating the user', error);
       }
@@ -113,5 +113,16 @@ export class LoginComponent {
 
   toSignUp() {
     this.navService.registration()
+  }
+
+  toLogin() {
+    this.navService.login();
+  }
+  logOut() {
+    this.authService.logOut();
+    this.navService.home();
+  }
+  backHome() {
+    this.navService.home();
   }
 }
