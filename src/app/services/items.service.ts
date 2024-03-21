@@ -24,7 +24,7 @@ export class ItemsService {
     this.loading.next(true);
 
     this.httpClient
-      .get<Item[]>('../../assets/data/items.json')
+      .get<Item[]>('assets/data/items.json')
       .pipe(delay(2000))
       .subscribe((items) => {
         this.items.next(items);
@@ -36,7 +36,7 @@ export class ItemsService {
     this.loading.next(true);
 
     this.httpClient
-      .get<Item[]>('../../assets/data/items.json')
+      .get<Item[]>('assets/data/items.json')
       .pipe(
         delay(2000),
         map((items) =>
