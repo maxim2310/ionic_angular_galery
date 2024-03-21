@@ -1,5 +1,5 @@
 {
-  "name": "test-angular-ionic",
+  "name": "ionic_angular_gallery",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -7,7 +7,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --output-path=docs",
-    "build:prod": "ng build --configuration=production --base-href=/ionic_angular_gallery/",
+    "build:prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
