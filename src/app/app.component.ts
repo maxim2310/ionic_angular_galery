@@ -12,5 +12,6 @@ import { AsyncPipe } from '@angular/common';
 })
 export class AppComponent {
   public loading$ = this.itemService.loading$;
+  
   constructor(private itemService: ItemsService) {}
 }
