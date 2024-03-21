@@ -22,7 +22,7 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "baseHref": "/ionic_angular_gallery",
-            "deployUrl": "/",
+            "deployUrl": "/ionic_angular_gallery",
             "polyfills": ["src/polyfills.ts"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
