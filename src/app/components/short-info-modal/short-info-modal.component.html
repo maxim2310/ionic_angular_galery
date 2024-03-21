@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Log in to continue</ion-title>
+    <ion-icon size="large" slot="end" name="close-circle-outline" (click)="close()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>To continue you have to log in</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-button expand="outline" color="rounded" (click)="close()">Cancel</ion-button>
+    <ion-button expand="outline" shape="rounded" color="primary" (click)="onOk()">Ok</ion-button>
+  </ion-card-content>
+</ion-card>

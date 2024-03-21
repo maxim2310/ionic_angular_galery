@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+ion-content {
+  --padding-bottom: 56px;
+}
+
+::ng-deep ion-searchbar {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-inline-end: 0px !important;
+  padding-inline-start: 0px !important;
+
+  .searchbar-input {
+    --border-radius: 30px;
+    --box-shadow: none;
+    border: 2px solid #d2d2d2 !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+  }
+}
+
+ion-button {
+  width: 100%;
+  --border-color: #d2d2d2;
+  --border-width: 2px;
+  height: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+ion-select {
+  min-height: 45px;
+  --border-width: 2px;
+  --border-color: #d2d2d2;
+  --padding-end: 13px;
+  --padding-start: 26px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+}

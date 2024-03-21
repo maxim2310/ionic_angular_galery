@@ -1,0 +1,52 @@
+@import "../../../theme/mixins.scss";
+
+:host {
+  display: block;
+}
+
+ion-toolbar {
+  padding-inline: 20px;
+  --min-height: 40px;
+}
+
+ion-title {
+  padding-inline-start: 0px;
+  padding-inline-end: 0px;
+}
+
+ion-card {
+  box-shadow: none;
+  margin: 0;
+  height: calc(100% - 40px);
+  display: flex;
+  flex-direction: column;
+}
+
+ion-card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  ion-card-title {
+    // font-weight: 400;
+    font-size: 24px;
+    color: var(--ion-color-primary-tint);
+  }
+}
+
+ion-card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  ion-button {
+    width: 20%;
+
+    @include mobile {
+      width: 40%;
+      height: 50px;
+    }
+  }
+}
